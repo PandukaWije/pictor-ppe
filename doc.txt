@@ -1,8 +1,0 @@
-Final Boxes:[[154.21024    99.633705  379.4722    326.50946     0.999969    2.       ]
- [ 21.01411   145.13527   111.51253   191.2364      0.9352872   0.       ]]
-
-
-detection parentage = final boxes[i][5]*100
- Worker (Red) = 2.
- Vest (Green) = 1.
- Hat (Blue) = 0.

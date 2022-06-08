@@ -136,32 +136,30 @@ def output_doc(boxes):
     object_info = []
     o_info = []
     cat_id = -1
+
     # print(f"{len(boxes)} objects detected from {image_name}\n")
     # for item_no in range(len(boxes)):
     # ['W', 'WH', 'WV', 'WHV']
+
     for box in boxes:
         if box[5] == 0.0:
             detected_object = "person"
-            value = "W"
             cat_id = 1
         elif box[5] == 1.0:
             detected_object = "person-hat"
-            value = "WH"
             cat_id = 2
         elif box[5] == 2.0:
             detected_object = "person-hivis"
-            value = "WV"
             cat_id = 0
         elif box[5] == 3.0:
             detected_object = "person-hat-hivis"
-            value = "WHV"
             cat_id = 3
 
         o_info += [
             {
                 "Object_Class": float(box[5]),
-                "value": value,
                 "Object_name": detected_object,
+                # if output need more details about the accuracy , uncomment the next two rows
                 # "Certainty(raw)": float(box[4]),
                 # "Certainty(%)": f'{round(box[4] * 100)}%',
             },
@@ -172,7 +170,7 @@ def output_doc(boxes):
     read_data = []
 
     doc_data = {
-        # "Image_name": image_name[0],
+        "Image_name": image_name[0],
         "Image_ID": image_name[1],
         "object_count": len(boxes),
         "object_info": o_info,
@@ -213,24 +211,10 @@ def read_images():
             img_data.append([item['file_name'], item['id']])
 
         for item in annotations_data:
-
-            if item['category_id'] == 0:
-                category_name = "person"
-                value = "W"
-            elif item['category_id'] == 1:
-                category_name = "person-hat"
-                value = "WH"
-            elif item['category_id'] == 2:
-                category_name = "person-hivis"
-                value = "WV"
-            elif item['category_id'] == 3:
-                category_name = "person-hat-hivis"
-                value = "WHV"
-
-            ano_data.append({"image_id": item['image_id'], "category_name": category_name, "value": value})
+            ano_data.append([item['image_id'], item['category_id']])
 
         for item in categories_data:
-            cat_data.append({"category_id": item['id'], "category_name": item['supercategory']})
+            cat_data.append([item['id'], item['supercategory']])
 
         img_data = sorted(img_data)
 
@@ -252,13 +236,18 @@ info = {}
 with open('img_src/doc_info.json', 'w') as json_file:
     pass
 
-for i in range(1):
+# set number n to image amount you need to run through the script
+image_count = 50
+
+for i in range(image_count):
     selected_img.append(random.choice(read_images()))
     selected_img_id.append(selected_img[i][1])
 
 count = 0
 
-prepare_model(2)
+# set model_approach to number 1, 2, 3 as you wish to get the output
+model_approach = 2
+prepare_model(model_approach)
 
 for image_name in selected_img:
     count += 1
@@ -277,4 +266,4 @@ for image_name in selected_img:
 
 # write the selected image data into another json file called selected_img_info
 with open('img_src/selected_img_info.json', 'w') as json_file:
-    json.dump(ano_data, json_file)
+    json.dump(info, json_file)
