@@ -1,6 +1,8 @@
 Documentation of the final project is here 👇
 
-https://docs.google.com/document/d/1KktY1iDBYPJCuTrUjUF8450qkRH6lNX6Q2711oJqMpU/edit?usp=sharing
+https://docs.google.com/document/d/1KktY1iDBYPJCuTrUjUF8450qkRH6lNX6Q2711oJqMpU/edit?usp=sharing\
+
+👇👇 Original Documentation 👇👇
 
 <img src="extras/graphics/PPE_logo.jpg" alt="Logo" width="400" align="middle"/>
 
